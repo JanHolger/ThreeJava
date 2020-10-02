@@ -1,7 +1,7 @@
 package eu.bebendorf.threejava.loader;
 
 import eu.bebendorf.threejava.camera.Camera;
-import eu.bebendorf.threejava.Group;
+import eu.bebendorf.threejava.objects.Group;
 import eu.bebendorf.threejava.animation.AnimationClip;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.JSProperty;

@@ -1,6 +1,6 @@
 package eu.bebendorf.threejava.renderer;
 
-import eu.bebendorf.threejava.Scene;
+import eu.bebendorf.threejava.scene.Scene;
 import eu.bebendorf.threejava.camera.Camera;
 import org.teavm.jso.JSObject;
 import org.teavm.jso.JSProperty;

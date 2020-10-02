@@ -1,6 +1,6 @@
 package eu.bebendorf.threejava.light;
 
-import org.teavm.jso.JSObject;
+import eu.bebendorf.threejava.objects.Object3D;
 
-public interface Light extends JSObject {
+public interface Light extends Object3D {
 }
