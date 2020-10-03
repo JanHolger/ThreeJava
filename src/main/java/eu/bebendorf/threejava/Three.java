@@ -11,15 +11,11 @@ import eu.bebendorf.threejava.controls.*;
 import eu.bebendorf.threejava.geometry.*;
 import eu.bebendorf.threejava.light.*;
 import eu.bebendorf.threejava.loader.*;
-import eu.bebendorf.threejava.material.Material;
-import eu.bebendorf.threejava.material.MeshBasicMaterial;
-import eu.bebendorf.threejava.math.Color;
-import eu.bebendorf.threejava.math.Quaternion;
-import eu.bebendorf.threejava.math.Vector3;
+import eu.bebendorf.threejava.material.*;
+import eu.bebendorf.threejava.math.*;
+import eu.bebendorf.threejava.objects.*;
 import eu.bebendorf.threejava.renderer.WebGLCubeRenderTarget;
 import eu.bebendorf.threejava.renderer.WebGLRenderer;
-import eu.bebendorf.threejava.objects.Mesh;
-import eu.bebendorf.threejava.objects.Object3D;
 import eu.bebendorf.threejava.scene.Scene;
 import org.teavm.jso.JSBody;
 import org.teavm.jso.JSObject;
@@ -140,18 +136,60 @@ public class Three {
     // Materials
     // =========================================================
 
+    @JSBody(params = {"parameters"}, script = "return new THREE.SpriteMaterial(parameters)")
+    public static native SpriteMaterial SpriteMaterial(JSObject parameters);
+
+    @JSBody(script = "return new THREE.SpriteMaterial()")
+    public static native SpriteMaterial SpriteMaterial();
+
     @JSBody(params = {"parameters"}, script = "return new THREE.MeshBasicMaterial(parameters)")
     public static native MeshBasicMaterial MeshBasicMaterial(JSObject parameters);
 
     @JSBody(script = "return new THREE.MeshBasicMaterial()")
     public static native MeshBasicMaterial MeshBasicMaterial();
 
+    @JSBody(params = {"parameters"}, script = "return new THREE.MeshStandardMaterial(parameters)")
+    public static native MeshStandardMaterial MeshStandardMaterial(JSObject parameters);
+
+    @JSBody(script = "return new THREE.MeshStandardMaterial()")
+    public static native MeshStandardMaterial MeshStandardMaterial();
+
+    @JSBody(params = {"parameters"}, script = "return new THREE.MeshPhongMaterial(parameters)")
+    public static native MeshPhongMaterial MeshPhongMaterial(JSObject parameters);
+
+    @JSBody(script = "return new THREE.MeshPhongMaterial()")
+    public static native MeshPhongMaterial MeshPhongMaterial();
+
+    @JSBody(params = {"parameters"}, script = "return new THREE.MeshToonMaterial(parameters)")
+    public static native MeshToonMaterial MeshToonMaterial(JSObject parameters);
+
+    @JSBody(script = "return new THREE.MeshToonMaterial()")
+    public static native MeshToonMaterial MeshToonMaterial();
+
     // =========================================================
     // Objects
     // =========================================================
 
+    @JSBody(params = {"material"}, script = "return new THREE.Sprite(material)")
+    public static native Sprite Sprite(Material material);
+
+    @JSBody(script = "return new THREE.Sprite()")
+    public static native Sprite Sprite();
+
     @JSBody(params = {"geometry", "material"}, script = "return new THREE.Mesh(geometry, material)")
     public static native Mesh Mesh(Geometry geometry, Material material);
+
+    @JSBody(params = {"geometry"}, script = "return new THREE.Mesh(geometry)")
+    public static native Mesh Mesh(Geometry geometry);
+
+    @JSBody(script = "return new THREE.Mesh()")
+    public static native Mesh Mesh();
+
+    @JSBody(script = "return new THREE.Group()")
+    public static native Group Group();
+
+    @JSBody(params = {"geometry", "material", "count"}, script = "return new THREE.InstancedMesh(geometry,material,count)")
+    public static native InstancedMesh InstancedMesh(Geometry geometry, Material material, int count);
 
     // =========================================================
     // Math
@@ -162,6 +200,30 @@ public class Three {
 
     @JSBody(params = {"x", "y", "z"}, script = "return new THREE.Vector3(x,y,z)")
     public static native Vector3 Vector3(float x, float y, float z);
+
+    @JSBody(script = "return new THREE.Vector2()")
+    public static native Vector2 Vector2();
+
+    @JSBody(params = {"x", "y"}, script = "return new THREE.Vector2(x,y)")
+    public static native Vector2 Vector2(float x, float y);
+
+    @JSBody(script = "return new THREE.Euler()")
+    public static native Euler Euler();
+
+    @JSBody(params = {"x", "y", "z"}, script = "return new THREE.Euler(x,y,z)")
+    public static native Euler Euler(float x, float y, float z);
+
+    @JSBody(script = "return new THREE.Sphere()")
+    public static native Sphere Sphere();
+
+    @JSBody(params = {"center", "radius"}, script = "return new THREE.Sphere(center,radius)")
+    public static native Sphere Sphere(Vector3 center, float radius);
+
+    @JSBody(script = "return new THREE.Box3()")
+    public static native Box3 Box3();
+
+    @JSBody(params = {"min", "max"}, script = "return new THREE.Box3(min,max)")
+    public static native Box3 Box3(Vector3 min, Vector3 max);
 
     @JSBody(params = {"color"}, script = "return new THREE.Color(color)")
     public static native Color Color(int color);

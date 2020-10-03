@@ -3,7 +3,7 @@ package eu.bebendorf.threejava.material;
 import eu.bebendorf.threejava.math.Color;
 import eu.bebendorf.threejava.texture.Texture;
 
-public interface MeshBasicMaterial extends Material {
+public interface MeshPhongMaterial extends Material {
 
     Texture getAlphaMap();
     void setAlphaMap(Texture alphaMap);
@@ -11,9 +11,15 @@ public interface MeshBasicMaterial extends Material {
     void setColor(Color color);
     Texture getMap();
     void setMap(Texture map);
+    Texture getNormalMap();
+    void setNormalMap(Texture normalMap);
     float getReflectivity();
     void setReflectivity(float reflectivity);
-    Texture getSpecularMap();
-    void setSpecularMap(Texture specularMap);
+    Color getEmissive();
+    void setEmissive(Color color);
+    Texture getEmissiveMap();
+    void setEmissiveMap(Texture emissiveMap);
+    float getEmissiveIntensity();
+    void setEmissiveIntensity(float emissiveIntensity);
 
 }
