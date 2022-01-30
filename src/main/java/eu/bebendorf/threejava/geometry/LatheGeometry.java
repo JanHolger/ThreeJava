@@ -1,4 +1,4 @@
 package eu.bebendorf.threejava.geometry;
 
-public interface LatheGeometry extends Geometry {
+public interface LatheGeometry extends BufferGeometry {
 }

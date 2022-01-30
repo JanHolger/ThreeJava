@@ -1,4 +1,4 @@
 package eu.bebendorf.threejava.geometry;
 
-public interface RingGeometry extends Geometry {
+public interface RingGeometry extends BufferGeometry {
 }

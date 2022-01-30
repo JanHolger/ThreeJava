@@ -1,4 +1,4 @@
 package eu.bebendorf.threejava.geometry;
 
-public interface SphereGeometry extends Geometry {
+public interface SphereGeometry extends BufferGeometry {
 }

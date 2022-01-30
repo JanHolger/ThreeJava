@@ -4,16 +4,21 @@ import eu.bebendorf.threejava.animation.AnimationAction;
 import eu.bebendorf.threejava.animation.AnimationClip;
 import eu.bebendorf.threejava.animation.AnimationMixer;
 import eu.bebendorf.threejava.animation.tracks.*;
+import eu.bebendorf.threejava.camera.Camera;
 import eu.bebendorf.threejava.camera.CubeCamera;
 import eu.bebendorf.threejava.camera.OrthographicCamera;
 import eu.bebendorf.threejava.camera.PerspectiveCamera;
 import eu.bebendorf.threejava.controls.*;
 import eu.bebendorf.threejava.geometry.*;
+import eu.bebendorf.threejava.helper.AxesHelper;
+import eu.bebendorf.threejava.helper.CameraHelper;
+import eu.bebendorf.threejava.helper.GridHelper;
 import eu.bebendorf.threejava.light.*;
 import eu.bebendorf.threejava.loader.*;
 import eu.bebendorf.threejava.material.*;
 import eu.bebendorf.threejava.math.*;
 import eu.bebendorf.threejava.objects.*;
+import eu.bebendorf.threejava.path.Shape;
 import eu.bebendorf.threejava.renderer.WebGLCubeRenderTarget;
 import eu.bebendorf.threejava.renderer.WebGLRenderer;
 import eu.bebendorf.threejava.scene.Scene;
@@ -63,6 +68,22 @@ public class Three {
     // Geometries
     // =========================================================
 
+    @JSBody(script = "return new THREE.PlaneGeometry()")
+    public static native PlaneGeometry PlaneGeometry();
+
+    @JSBody(params = {"width", "height" }, script = "return new THREE.PlaneGeometry(width,height)")
+    public static native PlaneGeometry PlaneGeometry(float width, float height);
+
+    @JSBody(script = "return new THREE.BufferGeometry()")
+    public static native BufferGeometry BufferGeometry();
+
+    /**
+     * geometry — Any geometry object.
+     * thresholdAngle — An edge is only rendered if the angle (in degrees) between the face normals of the adjoining faces exceeds this value. default = 1 degree. 
+     */
+    @JSBody(params = {"geometry", "thresholdAngle" }, script = "return new THREE.EdgesGeometry(geometry,thresholdAngle)")
+    public static native EdgesGeometry EdgesGeometry(BufferGeometry geometry, int thresholdAngle);
+    
     @JSBody(script = "return new THREE.BoxGeometry()")
     public static native BoxGeometry BoxGeometry();
 
@@ -129,13 +150,17 @@ public class Three {
     @JSBody(params = {"radius", "widthSegments", "heightSegments", "phiStart", "phiEnd", "thetaStart", "thetaEnd"}, script = "return new THREE.SphereGeometry(radius,widthSegments,heightSegments,phiStart,phiEnd,thetaStart,thetaEnd)")
     public static native SphereGeometry SphereGeometry(float radius, int widthSegments, int heightSegments, float phiStart, float phiEnd, float thetaStart, float thetaEnd);
 
-    @JSBody(params = {"text", "parameters"}, script = "return new THREE.TextGeometry(text,parameters)")
+    @JSBody(params = {"text", "parameters"}, script = "return new TextGeometry(text,parameters)")
     public static native TextGeometry TextGeometry(String text, JSObject parameters);
 
     // =========================================================
     // Materials
     // =========================================================
 
+    public static final int FrontSide = 0;
+    public static final int BackSide = 1;
+    public static final int DoubleSide = 2;
+    
     @JSBody(params = {"parameters"}, script = "return new THREE.SpriteMaterial(parameters)")
     public static native SpriteMaterial SpriteMaterial(JSObject parameters);
 
@@ -166,6 +191,9 @@ public class Three {
     @JSBody(script = "return new THREE.MeshToonMaterial()")
     public static native MeshToonMaterial MeshToonMaterial();
 
+    @JSBody(params = {"parameters"}, script = "return new THREE.LineBasicMaterial(parameters)")
+    public static native LineBasicMaterial LineBasicMaterial(JSObject parameters);
+    
     // =========================================================
     // Objects
     // =========================================================
@@ -185,11 +213,17 @@ public class Three {
     @JSBody(script = "return new THREE.Mesh()")
     public static native Mesh Mesh();
 
+    @JSBody(params = {"geometry", "material"}, script = "return new THREE.Line(geometry, material)")
+    public static native Line Line(BufferGeometry geometry, Material material);
+
     @JSBody(script = "return new THREE.Group()")
     public static native Group Group();
 
     @JSBody(params = {"geometry", "material", "count"}, script = "return new THREE.InstancedMesh(geometry,material,count)")
     public static native InstancedMesh InstancedMesh(Geometry geometry, Material material, int count);
+
+    @JSBody(script = "return new THREE.Shape()")
+    public static native Shape Shape();
 
     // =========================================================
     // Math
@@ -233,6 +267,9 @@ public class Three {
 
     @JSBody(params = {"r", "g", "b"}, script = "return new THREE.Color(r, g, b)")
     public static native Color Color(float r, float g, float b);
+
+    @JSBody(params = {"a", "b", "c"}, script = "return new THREE.Triangle(a,b,c)")
+    public static native Triangle Triangle(Vector3 a, Vector3 b, Vector3 c);
 
     // =========================================================
     // Lights
@@ -306,7 +343,7 @@ public class Three {
     @JSBody(script = "return new THREE.AudioLoader()")
     public static native AudioLoader AudioLoader();
 
-    @JSBody(script = "return new THREE.FontLoader()")
+    @JSBody(script = "return new FontLoader()")
     public static native FontLoader FontLoader();
 
     @JSBody(script = "return new THREE.ImageLoader()")
@@ -340,4 +377,16 @@ public class Three {
     @JSBody(params = {"name", "times", "values"}, script = "return new THREE.VectorKeyframeTrack(name,times,values)")
     public static native VectorKeyframeTrack VectorKeyframeTrack(String name, float[] times, Vector3[] values);
 
+    // =========================================================
+    // Helpers
+    // =========================================================
+
+    @JSBody(params = {"size"}, script = "return new THREE.AxesHelper(size)")
+    public static native AxesHelper AxesHelper(float size);
+
+    @JSBody(params = {"size", "divisions"}, script = "return new THREE.GridHelper(size,divisions)")
+    public static native GridHelper GridHelper(float size, int divisions);
+
+    @JSBody(params = {"camera"}, script = "return new THREE.CameraHelper(camera)")
+    public static native CameraHelper CameraHelper(Camera camera);
 }
