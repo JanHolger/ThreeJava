@@ -1,6 +1,8 @@
 package eu.bebendorf.threejava.controls;
 
-public interface Controls {
+import org.teavm.jso.JSObject;
+
+public interface Controls extends JSObject {
 
     void update();
 

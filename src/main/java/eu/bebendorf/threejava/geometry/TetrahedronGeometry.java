@@ -1,4 +1,4 @@
 package eu.bebendorf.threejava.geometry;
 
-public interface TetrahedronGeometry extends Geometry {
+public interface TetrahedronGeometry extends PolyhedronGeometry {
 }
